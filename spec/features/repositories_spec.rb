@@ -159,7 +159,7 @@ feature "Repositories support" do
 
           expect(page).to_not have_content("Delete tags")
           find("tbody tr input[type='checkbox']", match: :first)
-          all("tbody tr input[type='checkbox']").each(&:click)
+          all("tbody tr input[type='checkbox']").last.click
           expect(page).to have_content("Delete tags")
           find(".tag-delete-btn").click
           expect(page).to have_content("tag1, tag2 successfully removed")
