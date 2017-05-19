@@ -82,9 +82,12 @@ $(() => {
         const success = [];
         const failure = [];
         const total = this.state.selectedTags.length;
+        const tags = this.tags;
+        const namespaceHref = this.$refs.repoLink.querySelector('a').href;
+
         let promiseCount = 0;
 
-        const showAlert = (count) => {
+        const showAlert = function (count) {
           if (count === total) {
             let message = '';
 
@@ -97,8 +100,7 @@ $(() => {
 
             Alert.show(message);
 
-            if (!this.tags.length) {
-              const namespaceHref = this.$refs.repoLink.querySelector('a').href;
+            if (!tags.length) {
               window.location.href = namespaceHref;
             }
           }
