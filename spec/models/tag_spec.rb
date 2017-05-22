@@ -30,6 +30,12 @@ class TagMock < Tag
   end
 end
 
+# Mock class that avoid the whole initialization of ::Portus::Security
+class PortusSecurityMock
+  def vulnerabilities
+  end
+end
+
 describe Tag do
   let!(:registry)   { create(:registry, hostname: "registry.test.lan") }
   let!(:user)       { create(:admin) }
@@ -180,12 +186,12 @@ describe Tag do
     let!(:tag) { create(:tag, name: "tag1", user_id: user.id, repository: repository, digest: "1") }
 
     before do
+      allow(tag).to receive(:vulnerabilities).and_return([])
+
       enable_security_module!
     end
 
     it "includes expected attributes" do
-      allow_any_instance_of(::Portus::Security).to receive(:vulnerabilities).and_return([])
-
       attrs = [:id, :name, :image_id, :digest, :updated_at]
       tag_json = tag.as_json
       attrs.each do |attr|
