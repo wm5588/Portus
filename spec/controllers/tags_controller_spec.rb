@@ -3,6 +3,34 @@ require "rails_helper"
 describe TagsController, type: :controller do
   let(:valid_session) { {} }
 
+  describe "GET #show" do
+    let!(:registry)   { create(:registry, hostname: "registry.test.lan") }
+    let!(:user)       { create(:admin) }
+    let!(:repository) { create(:repository, namespace: registry.global_namespace, name: "repo") }
+    let!(:tag)        { create(:tag, name: "tag0", repository: repository) }
+
+    before :each do
+      sign_in user
+      request.env["HTTP_REFERER"] = "/"
+
+      enable_security_module!
+    end
+
+    it "assigns the requested tag as @tag" do
+      allow_any_instance_of(::Portus::Security).to receive(:vulnerabilities).and_return([])
+      get :show, { id: tag.to_param }, valid_session
+      expect(assigns(:tag)).to eq(tag)
+      expect(response.status).to eq 200
+    end
+
+    it "assigns the tag's vulnerabilities as @vulnerabilities" do
+      allow_any_instance_of(::Portus::Security).to receive(:vulnerabilities).and_return(['something'])
+      get :show, { id: tag.to_param }, valid_session
+      expect(assigns(:vulnerabilities)).to eq(['something'])
+      expect(response.status).to eq 200
+    end
+  end
+
   describe "DELETE #destroy" do
     let!(:registry)   { create(:registry, hostname: "registry.test.lan") }
     let!(:user)       { create(:admin) }
