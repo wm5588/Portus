@@ -19,9 +19,11 @@ module Portus
     end
 
     # Returns a hash with the results from all the backends. The results are a
-    # list of hashes.
-    # TODO: document format
+    # list of hashes. If security vulnerability checking is not enabled, then
+    # nil is returned.
     def vulnerabilities
+      return if @backends.empty?
+
       # First get all the layers composing the given image.
       client = Registry.get.client
       manifest = client.manifest(@repo, @tag)
