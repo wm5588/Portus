@@ -101,15 +101,7 @@ feature "Repositories support" do
       before do
         APP_CONFIG["delete"] = { "enabled" => true }
 
-        APP_CONFIG["security"] = {
-          "clair" => {
-            "server" => ""
-          }, "zypper" => {
-            "server" => ""
-          }, "dummy" => {
-            "server" => "dummy"
-          }
-        }
+        enable_security_module!
       end
 
       scenario "The delete feature is available only for allowed users" do

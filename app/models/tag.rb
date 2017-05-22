@@ -88,7 +88,7 @@ class Tag < ActiveRecord::Base
 
     super(options).tap do |json|
       sec = ::Portus::Security.new(repository.full_name, name)
-      json[:vulnerabilities] = sec.vulnerabilities
+      json["vulnerabilities"] = sec.vulnerabilities
     end
   end
 
