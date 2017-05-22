@@ -18,11 +18,15 @@ module Portus
       BACKENDS.each { |b| @backends << b.new(repo, tag) if b.enabled? }
     end
 
+    def enabled?
+      !@backends.empty?
+    end
+
     # Returns a hash with the results from all the backends. The results are a
     # list of hashes. If security vulnerability checking is not enabled, then
     # nil is returned.
     def vulnerabilities
-      return if @backends.empty?
+      return unless enabled?
 
       # First get all the layers composing the given image.
       client = Registry.get.client

@@ -13,7 +13,7 @@ describe TagsController, type: :controller do
       sign_in user
       request.env["HTTP_REFERER"] = "/"
 
-      enable_security_module!
+      enable_security_vulns_module!
     end
 
     it "assigns the requested tag as @tag" do

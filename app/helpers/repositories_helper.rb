@@ -128,4 +128,9 @@ module RepositoriesHelper
   def name_and_link(tr, activity)
     tr.is_a?(Namespace) ? [repo_name(activity), nil] : [tr.name, tr]
   end
+
+  # Returns if any security module is enabled
+  def security_vulns_enabled?
+    ::Portus::Security.new(nil, nil).enabled?
+  end
 end

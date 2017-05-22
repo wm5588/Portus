@@ -101,7 +101,7 @@ feature "Repositories support" do
       before do
         APP_CONFIG["delete"] = { "enabled" => true }
 
-        enable_security_module!
+        enable_security_vulns_module!
       end
 
       scenario "The delete feature is available only for allowed users" do

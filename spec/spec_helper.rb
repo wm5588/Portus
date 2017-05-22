@@ -63,6 +63,16 @@ RSpec.configure do |config|
       "create_team"       => { "enabled" => true }
     }
 
+    APP_CONFIG["security"] = {
+      "clair" => {
+        "server" => ""
+      }, "zypper" => {
+        "server" => ""
+      }, "dummy" => {
+        "server" => ""
+      }
+    }
+
     Rails.cache.write("portus-checks", nil)
   end
 

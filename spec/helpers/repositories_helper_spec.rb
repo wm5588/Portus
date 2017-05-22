@@ -149,4 +149,16 @@ RSpec.describe RepositoriesHelper, type: :helper do
       end
     end
   end
+
+  describe "#security_vulns_enabled?" do
+    it "returns true if any security vulnerability server is configured" do
+      enable_security_vulns_module!
+
+      expect(helper.security_vulns_enabled?).to be_truthy
+    end
+
+    it "returns false if no security vulnerability server is configured" do
+      expect(helper.security_vulns_enabled?).to be_falsy
+    end
+  end
 end

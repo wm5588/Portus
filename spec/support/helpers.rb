@@ -18,15 +18,9 @@ module Helpers
     page.evaluate_script("$('#{selector}').attr('disabled')") == "disabled"
   end
 
-  def enable_security_module!
-    APP_CONFIG["security"] = {
-      "clair" => {
-        "server" => ""
-      }, "zypper" => {
-        "server" => ""
-      }, "dummy" => {
-        "server" => "dummy"
-      }
+  def enable_security_vulns_module!
+    APP_CONFIG["security"]["dummy"] = {
+      "server" => "dummy"
     }
   end
 

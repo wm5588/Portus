@@ -30,12 +30,6 @@ class TagMock < Tag
   end
 end
 
-# Mock class that avoid the whole initialization of ::Portus::Security
-class PortusSecurityMock
-  def vulnerabilities
-  end
-end
-
 describe Tag do
   let!(:registry)   { create(:registry, hostname: "registry.test.lan") }
   let!(:user)       { create(:admin) }
@@ -188,7 +182,7 @@ describe Tag do
     before do
       allow(tag).to receive(:vulnerabilities).and_return([])
 
-      enable_security_module!
+      enable_security_vulns_module!
     end
 
     it "includes expected attributes" do
