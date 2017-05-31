@@ -1,6 +1,6 @@
 const AVAILABLE_BACKENDS = ['clair', 'zypper', 'dummy'];
 
-export const parse = function (vulnerabilities) {
+const parse = function (vulnerabilities) {
   const severities = {
     High: 0,
     Normal: 0,

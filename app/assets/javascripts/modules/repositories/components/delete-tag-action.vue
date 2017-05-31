@@ -8,11 +8,7 @@
 </template>
 
 <script>
-  import Vue from 'vue';
-
   import EventBus from '~/utils/eventbus';
-
-  const { set } = Vue;
 
   export default {
     props: ['state'],

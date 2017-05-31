@@ -42,7 +42,7 @@
 
     computed: {
       start() {
-        return (this.currentPage * this.itensPerPage) - this.itensPerPage + 1;
+        return ((this.currentPage * this.itensPerPage) - this.itensPerPage) + 1;
       },
 
       end() {
