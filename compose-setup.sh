@@ -83,6 +83,12 @@ usage() {
   echo "  -c REGISTRY_PORT - the registry port. By default 5000"
 }
 
+create_mount_dir(){
+  echo "Create database and registry directory for mounting."
+  mkdir -p /data/portus/mysql
+  mkdir -p /data/portus/registry
+}
+
 # Force the current directory to be named "portus". It's known that other
 # setups will make docker-compose fail.
 #
@@ -137,6 +143,7 @@ check_mandatory_flags
 check_version
 create_configuration_files
 clean
+create_mount_dir
 docker-compose up -d
 
 setup_database

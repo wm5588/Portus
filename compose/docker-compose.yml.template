@@ -26,11 +26,13 @@ db:
   image: library/mariadb:10.0.23
   environment:
     MYSQL_ROOT_PASSWORD: portus
+  volumes:
+    - /data/portus/mysql:/var/lib/mysql
 
 registry:
   image: library/registry:2.3.1
   volumes:
-    - /registry_data
+    - /data/portus/registry:/registry_data
     - ./compose/registry/portus.crt:/etc/docker/registry/portus.crt:ro
     - ./compose/registry/config.yml:/etc/docker/registry/config.yml:ro
   ports:
